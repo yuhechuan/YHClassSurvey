@@ -188,6 +188,7 @@ struct yh_objc_class {
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         NSString *className = [NSString stringWithCString:classes[index] encoding:NSUTF8StringEncoding];
         Class class = NSClassFromString(className);
+        // 不能把类加入数组最后进行统一检测 会触发类的initialize
         NSString *class_name = [self surveyClass:class];
         if (class_name) {
             [resultArray addObject:class_name];
@@ -215,6 +216,7 @@ struct yh_objc_class {
     dispatch_apply(classCount, dispatch_get_global_queue(0, 0), ^(size_t index) {
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
         Class class = classes[index];
+        // 不能把类加入数组最后进行统一检测 会触发类的initialize
         NSString *className = [self surveyClass:class];
         if (className) {
             [resultArray addObject:className];
