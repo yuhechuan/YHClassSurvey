@@ -227,6 +227,13 @@ struct yh_objc_class {
     return resultArray.copy;
 }
 
+/*
+ // 系统原始方法
+ #define RW_INITIALIZED (1<<29)
+ bool isInitialized() {
+ return getMeta()->data()->flags & RW_INITIALIZED;
+ }
+ */
 
 /*
  * 检测元类的 flags 判断此类是否被初始化
